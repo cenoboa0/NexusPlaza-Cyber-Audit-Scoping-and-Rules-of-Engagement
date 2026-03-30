@@ -27,8 +27,8 @@ Para garantizar la seguridad y el cumplimiento durante la ejecución remota, se 
 | Comunicación | Teleconferencias e informes de actualización semanales con el Director de TI y gerentes de área. |
 
 ## Documentación Detallada
-* [Hoja de Trabajo del Alcance (Scoping)](documentation/scoping-worksheet.md)
-* [Reglas de Participación (RoE)](documentation/rules-of-engagement.md)
+* [Hoja de Trabajo del Alcance (Scoping)](scoping-worksheet.md)
+* [Reglas de Participación (RoE)](rules-of-engagement.md)
 
 ---
 Este proyecto forma parte de mi portafolio profesional de Ciberseguridad, demostrando competencias en Gestión de Riesgos, Cumplimiento (GRC) y Planificación de Auditorías.
