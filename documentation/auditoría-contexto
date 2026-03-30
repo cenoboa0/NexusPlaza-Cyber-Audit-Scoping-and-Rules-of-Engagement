@@ -1,0 +1,79 @@
+Auditoría de Seguridad: Nexus Plaza
+# Alcance de la Auditoría de Seguridad: Nexus Plaza
+
+Este documento detalla el alcance, las reglas de enfrentamiento (RoE) y el plan de trabajo para la auditoría de seguridad y prueba de penetración de la infraestructura de **Nexus Plaza**.
+
+---
+
+## 1. Tablas de Direccionamiento
+
+### Centro de Datos
+| Servidores | VLAN | Dirección IP | Máscara / Notas |
+| :--- | :---: | :--- | :--- |
+| Administración | 2 - 5 | 172.16.33.0/30 | 172.16.33.0/30 |
+| Soporte de Amazon | 10 - 25 | 172.24.1.0/24 | (4) 255.255.255.192 |
+| Operaciones | 50 - 55 | 172.25.0.0/16 | (11) 255.255.252.0 |
+| Logística | 80 - 85 | 172.26.0.0/21 | (5) 255.255.255.0 |
+| Administración (Adicional) | 100 - 110 | 172.27.0.0/21 | (5) 255.255.255.0 |
+| Varios | - | 172.30.0.0/16 | Según sea necesario |
+
+### Red LAN Corporativa
+| Departamento | VLAN | Dirección IP | Máscara de Subred |
+| :--- | :---: | :--- | :--- |
+| Administración | 120 | 172.16.1.0 | 255.255.255.0 |
+| Subred de Tecnología | 130 | 172.16.4.0 | 255.255.255.0 |
+| TI | 140 | 172.16.8.0 | 255.255.255.0 |
+| Depósito | 150 | 172.16.12.0 | 255.255.255.0 |
+| Atención al Cliente | 160 | 172.16.16.0 | 255.255.255.0 |
+| Envío | 170 | 172.16.20.0 | 255.255.255.0 |
+
+---
+
+## 2. Objetivos del Compromiso
+* **Definir Reglas de Enfrentamiento (RoE):** Establecer términos claros y alcance del trabajo.
+* **Evaluación de Vulnerabilidades:** Identificar fallos en sistemas operativos, software y aplicaciones.
+* **Simulación de Movimiento Lateral:** Verificar si un atacante con acceso de usuario final en el depósito puede escalar a privilegios de administrador o acceder a la base de datos de producción.
+
+---
+
+## 3. Escenario y Trasfondo
+Nexus Plaza es una empresa minorista en línea con infraestructura híbrida:
+* **Ventas:** Alojadas en Amazon (AWS).
+* **Operaciones Internas:** Centro de datos local en Houston (Administración, Operaciones, Logística).
+* **Preocupación Principal:** Ataques de Ransomware dirigidos al inventario y sistemas de envío/logística.
+
+---
+
+## 4. Alcance y Restricciones
+
+### ✅ Dentro del Alcance (In-Scope)
+* Clústeres de **Operaciones** y **Logística**.
+* Sistemas de control de inventario (Base de datos MS SQL Server).
+* Pruebas de Ingeniería Social (Phishing) a personal de operaciones y depósitos.
+* Pruebas de carga y DoS (Solo en ventanas de mantenimiento).
+* Escaneo de vulnerabilidades en sistemas operativos y aplicaciones.
+
+### ❌ Fuera del Alcance (Out-of-Scope)
+* **Clústeres de Soporte de Amazon:** Prohibido invadir cualquier sistema que contenga datos e inventario de la tienda Amazon.
+* **Base de Datos de Producción Real:** Se utilizará un sistema de desarrollo espejo para evitar interrupciones.
+
+---
+
+## 5. Reglas de Enfrentamiento (RoE)
+
+### Acceso y Metodología
+* **Punto de Acceso:** VLAN aislada dentro del departamento de TI.
+* **Tipo de Prueba:** Caja Gris (se proporciona acceso interno y lista de correos).
+* **Infraestructura de Red:** Interconexión vía VPN (SSL/IPsec), cortafuegos con IDS integrado y firewalls locales en cada servidor.
+
+### Ventanas de Tiempo
+* **Pruebas Disruptivas (DoS/Carga):** Viernes, Sábados y Domingos (02:00 AM - 06:00 AM).
+* **Pruebas No Disruptivas:** Horario comercial normal.
+* **Duración:** Inicio 2 semanas tras firma de contrato; entrega de informe final en 60 días.
+
+---
+
+## 6. Comunicación y Reporte
+* **Contactos Principales:** Director de TI, Gerente de Depósito y Gerente de Operaciones.
+* **Frecuencia:** Reunión de actualización semanal y teleconferencia para informar progresos y hallazgos intermedios.
+* **Confidencialidad:** Solo se notificará al personal crítico (monitoreo); los usuarios finales no estarán al tanto de las pruebas.
